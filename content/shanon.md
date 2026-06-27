@@ -11,4 +11,3 @@ tags:
 - Tishby, N. & Zaslavsky, N. (2015). Deep Learning and the Information Bottleneck Principle. https://arxiv.org/abs/1503.02406
 - Shwartz-Ziv, R. & Tishby, N. (2017). Opening the Black Box of Deep Neural Networks via Information. https://arxiv.org/abs/1703.00810
 - (2025). A Generalized Information Bottleneck Theory of Deep Learning. https://arxiv.org/abs/2509.26327
-- Curated reading list: Awesome-Information-Bottleneck (in memory of Naftali Tishby). https://github.com/ZIYU-DEEP/Awesome-Information-Bottleneck
