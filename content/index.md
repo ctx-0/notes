@@ -11,6 +11,16 @@ _Nothing amazing ever happens here. Everything is ordinary._
 #### *Read log*
 
 
+- [x] [Scaling Laws, Honestly | Diogo Almeida](https://x.com/CompleteSkeptic/status/2073442518117884197)
+
+Kaplan et al. trained all models on the fixed amount of data (~130B tokens) and used a learning rate schedule that zeroes. Former caused big models to not get enough data and later caused models to not train enough.
+
+[2406.12907](https://arxiv.org/abs/2406.12907), which tries to reconcile difference in results of two scaling lawa papers, is also inaccurate.
+
+
+
+Labs' equity vortex drying academia, closed research and not acknowledging wrong results... is a sad state of affairs.
+
 - [x] [LSA LongCat Sparse Attention - arjunkocher](https://www.k-a.in/LSA.html)
 
 The indexer becomes the bottleneck in sparse attention; Meituan LSA focuses on this bottleneck and introduces three **orthogonal** optimizations to indexer.
