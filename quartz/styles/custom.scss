@@ -193,6 +193,102 @@ h3 {
     box-shadow: none;
   }
 
+  .explorer:not([aria-expanded]) > .explorer-content,
+  .explorer[aria-expanded="false"] > .explorer-content {
+    visibility: hidden;
+    transform: translateX(-100vw);
+  }
+
+  .explorer[aria-expanded="true"] > .explorer-content {
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .explorer .explorer-content {
+    padding: 3.35rem 0.65rem 1.35rem;
+  }
+
+  .explorer-content > .explorer-ul {
+    padding: 0.15rem 0;
+  }
+
+  .explorer-content ul li > a,
+  .explorer-content .folder-container {
+    min-height: 2.05rem;
+    border-radius: 6px;
+    padding: 0.28rem 0.48rem;
+    transition:
+      background 140ms ease,
+      color 140ms ease,
+      opacity 140ms ease;
+  }
+
+  .explorer-content ul li > a {
+    display: flex;
+    align-items: center;
+    color: color-mix(in srgb, var(--dark) 84%, var(--secondary));
+    font-size: 0.94rem;
+    line-height: 1.22;
+    opacity: 0.82;
+  }
+
+  .explorer-content ul li {
+    margin: 0.08rem 0;
+  }
+
+  .explorer-content .folder-container {
+    gap: 0.28rem;
+    color: color-mix(in srgb, var(--secondary) 82%, var(--dark));
+  }
+
+  .explorer-content .folder-container .folder-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    margin-right: 0.08rem;
+    opacity: 0.78;
+  }
+
+  .explorer-content .folder-container div {
+    min-width: 0;
+  }
+
+  .explorer-content .folder-container div > a,
+  .explorer-content .folder-container div > button {
+    display: flex;
+    align-items: center;
+    min-height: unset;
+    padding: 0;
+    color: inherit;
+    line-height: 1.22;
+  }
+
+  .explorer-content .folder-container div > a,
+  .explorer-content .folder-container div > button span {
+    color: inherit;
+    font-size: 0.91rem;
+    font-weight: 650;
+    line-height: inherit;
+  }
+
+  .explorer-content ul li > a.active {
+    color: var(--tertiary);
+    opacity: 1;
+    background: color-mix(in srgb, var(--highlight) 68%, transparent);
+    box-shadow: inset 2px 0 0 var(--tertiary);
+  }
+
+  .explorer-content ul li > a:hover,
+  .explorer-content .folder-container:hover {
+    opacity: 1;
+    background: color-mix(in srgb, var(--lightgray) 42%, transparent);
+  }
+
+  .explorer-content .folder-outer > ul {
+    margin-left: 0.62rem;
+    padding-left: 0.42rem;
+    border-left-color: color-mix(in srgb, var(--dark) 12%, transparent);
+  }
+
   .center > .mobile-only .recent-notes {
     margin-top: 2.5rem;
     padding-top: 1.1rem;
