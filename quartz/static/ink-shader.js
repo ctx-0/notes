@@ -1,7 +1,4 @@
 ;(function () {
-  const canvases = document.querySelectorAll("[data-ink-shader]")
-  if (canvases.length === 0) return
-
   const vertexSource = `
 attribute vec2 a_position;
 
@@ -119,6 +116,9 @@ void main() {
   }
 
   function start(canvas) {
+    if (canvas.dataset.inkShaderStarted === "true") return
+    canvas.dataset.inkShaderStarted = "true"
+
     const gl =
       canvas.getContext("webgl", { antialias: false, depth: false, stencil: false }) ||
       canvas.getContext("experimental-webgl", { antialias: false, depth: false, stencil: false })
@@ -145,7 +145,20 @@ void main() {
 
     let width = 0
     let height = 0
+    let frame = 0
+    let active = true
     const startedAt = performance.now()
+
+    function cleanup() {
+      if (!active) return
+      active = false
+      cancelAnimationFrame(frame)
+      delete canvas.dataset.inkShaderStarted
+    }
+
+    if (typeof window.addCleanup === "function") {
+      window.addCleanup(cleanup)
+    }
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -162,6 +175,12 @@ void main() {
     }
 
     function render(now) {
+      if (!active) return
+      if (!canvas.isConnected) {
+        cleanup()
+        return
+      }
+
       resize()
       gl.useProgram(program)
       gl.enableVertexAttribArray(positionLocation)
@@ -170,11 +189,21 @@ void main() {
       gl.uniform2f(resolutionLocation, width, height)
       gl.uniform1f(timeLocation, (now - startedAt) / 1000)
       gl.drawArrays(gl.TRIANGLES, 0, 6)
-      requestAnimationFrame(render)
+      frame = requestAnimationFrame(render)
     }
 
-    requestAnimationFrame(render)
+    frame = requestAnimationFrame(render)
   }
 
-  canvases.forEach(start)
+  function init() {
+    document.querySelectorAll("[data-ink-shader]").forEach(start)
+  }
+
+  init()
+
+  if (!window.__inkShaderListenersBound) {
+    window.__inkShaderListenersBound = true
+    document.addEventListener("nav", init)
+    document.addEventListener("render", init)
+  }
 })()

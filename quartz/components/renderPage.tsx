@@ -95,6 +95,12 @@ export function pageResources(
         script: contentIndexScript,
       },
       ...resolvedJs,
+      {
+        src: joinSegments(baseDir, "static/ink-shader.js"),
+        loadTime: "afterDOMReady",
+        contentType: "external",
+        spaPreserve: true,
+      },
     ],
     additionalHead: staticResources.additionalHead,
   }
