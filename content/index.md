@@ -14,18 +14,16 @@ _Nothing amazing ever happens here. Everything is ordinary._
 𓆝 𓆟 𓆞
 
 
-- [ ] [Scaling Laws, Carefully | Lil'Log](https://lilianweng.github.io/posts/2026-06-24-scaling-laws/) *
 
-Why scaling follows a power law?  
-Scaling laws in practice.
 
 - [x] [When AI Starts Writing Systems Code \| Core Automation](https://www.coreauto.com/blog/when-ai-starts-writing-systems-code) *
 	- [ ] [Reward Hacking in KernelBench - Sinatras](https://blog.sinatras.dev/Reward+Hacking+in+KernelBench)
 	- [ ] [KernelGuard - Sinatras](https://blog.sinatras.dev/KernelGuard)
 
-TL;DR AI can't write kernels ~Apr 25; AI can write kernels ~Jan 2026. Then reward hacking became a bigger problem than one could imagine.
+Models can write [competetive](https://x.com/marksaroufim/status/2009497284418130202?s=20) kernels now. But reward hacking is a bigger problem now than one could imagine. Some really good examples of reward hacking. 
 
 (It's definitely not a kernel-writing specific problem though (?) Models are obviously reward hacking in the wild, it's just not getting the same scrutiny.)
+
 
 Hints at what [Core Automation](https://www.coreauto.com/) is doing. Some inspirations from Adversarial training, although a *clarification* at end that they're still using transformers. 
 
