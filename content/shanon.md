@@ -1,5 +1,5 @@
 ---
-title: "Papers: LLM x Information Theory"
+title: "LLM x Information Theory"
 draft: false
 tags:
   - information-theory
