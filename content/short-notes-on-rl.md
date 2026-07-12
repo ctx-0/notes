@@ -1,5 +1,5 @@
 ---
-title: Short Notes on RL for LLMs
+title: Short Notes on RL
 ---
 
 
@@ -8,7 +8,7 @@ Short Notes on RL for LLMs
 ## Policy Gradients
 
 ***Why?***  
-Because when actions are sampled discretely, we generally cannot backpropagate through the action, environment, or reward.  
+When actions are sampled discretely, we generally cannot backpropagate through the action, environment, or reward.  
 Policy gradients let us optimize the expected reward using only sampled actions, their rewards, and their log-probability gradients.
 
 ***Key Idea***  
@@ -26,7 +26,7 @@ $$
 ## REINFORCE
 
 ***Why?***  
-Because the policy-gradient equation is an expectation, but in practice we only have sampled trajectories. We need a concrete estimator that can turn those samples into a gradient update.
+The policy-gradient equation is an expectation. In practice, we only have sampled trajectories. We need a concrete estimator that turns those samples into a gradient update.
 
 ***Key Idea***  
 Sample a trajectory, observe its return, and use that use the return-to-go $G_t$ to weight the log-probability gradient.  
@@ -88,7 +88,7 @@ Requires a learned critic $V(s)$, the exact component GRPO later removes.
 ## PPO
 
 ***Why?***  
-Because raw policy-gradient updates can be too large and destabilize training.  
+Raw policy-gradient updates can be too large and destabilize training.  
 The principled fix (a hard trust region, TRPO) needs expensive second-order optimization. PPO wants that stability with plain SGD, reusable across several epochs of the same batch.
 
 
@@ -152,7 +152,7 @@ $$
 ## GRPO
 
 ***Why?***  
-Because PPO usually requires a critic or value model, which is expensive for large language models.
+PPO usually requires a critic or value model, which is expensive for large language models.
 
 ***Key Idea***  
 Generate several responses for the same prompt, compare their rewards within that group, and use relative performance as the advantage signal.  
@@ -169,19 +169,6 @@ R_i - \operatorname{mean}(R_1, \ldots, R_G)
 }
 $$
 
-Define the token-level probability ratio:
-
-$$
-\rho_{i,t}(\theta)
-=
-\frac{
-\pi_\theta(o_{i,t} \mid q, o_{i,<t})
-}{
-\pi_{\theta_{\mathrm{old}}}(o_{i,t} \mid q, o_{i,<t})
-}
-$$
-
-Then:
 
 $$
 \mathcal{J}_{\mathrm{GRPO}}(\theta)
@@ -208,6 +195,15 @@ $$
 \right)
 \right]
 $$
+
+***Notation***
+
+- $G$: number of sampled completions for one prompt; $i$ indexes a completion in the group.
+- $o_i$: the $i$-th completion; $|o_i|$ is its token count, and $t$ indexes its tokens.
+- $\hat{A}_i$: group-normalized reward advantage for completion $i$; the same value is applied to all its tokens.
+- $\epsilon$: clipping range controlling how far the policy ratio may move from $1$.
+- $\pi_{\mathrm{ref}}$: fixed reference policy; $D_{\mathrm{KL}}(\pi_\theta\|\pi_{\mathrm{ref}})$ penalizes drift from it.
+- $\beta$: strength of the KL penalty.
 
 
 ## References
